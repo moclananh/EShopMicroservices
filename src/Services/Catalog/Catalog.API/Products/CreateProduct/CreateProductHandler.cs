@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using BuidingBlocks.CQRS;
+using Catalog.API.Models;
+using MediatR;
 using System.Reflection.Metadata;
 
 namespace Catalog.API.Products.CreateProduct
@@ -10,13 +12,26 @@ namespace Catalog.API.Products.CreateProduct
         string ImageFile,
         decimal Price,
         List<string> Category
-        ): IRequest<CreateProductResult>;
+        ): ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreateProductResult>
+    public class CreateProductCommandHandler 
+        : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
-        public Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            // create product entity from command object
+            var product = new Product
+            {
+                Name = command.Name,
+                Description = command.Description,
+                ImageFile = command.ImageFile,
+                Price = command.Price,
+                Category = command.Category
+            };
+
+            // save to database
+            return new CreateProductResult(Guid.NewGuid());
+            
         }
     }
 }
