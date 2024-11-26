@@ -1,8 +1,4 @@
-﻿using BuidingBlocks.CQRS;
-using Catalog.API.Models;
-using MediatR;
-using System.Reflection.Metadata;
-
+﻿
 namespace Catalog.API.Products.CreateProduct
 {
     /* Applying CQRS and MediatR */
@@ -14,7 +10,7 @@ namespace Catalog.API.Products.CreateProduct
         List<string> Category
         ): ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
-    public class CreateProductCommandHandler 
+    public class CreateProductCommandHandler(IDocumentSession session)
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -29,8 +25,13 @@ namespace Catalog.API.Products.CreateProduct
                 Category = command.Category
             };
 
+
+            // save changes (using Marten library)
+            session.Store(product);
+            await session.SaveChangesAsync(cancellationToken);
+
             // save to database
-            return new CreateProductResult(Guid.NewGuid());
+            return new CreateProductResult(product.Id);
             
         }
     }
