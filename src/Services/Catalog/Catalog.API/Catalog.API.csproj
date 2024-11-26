@@ -18,10 +18,8 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="Products\DeleteProduct\" />
     <Folder Include="Products\GetProductByCategory\" />
-    <Folder Include="Products\GetProductById\" />
     <Folder Include="Products\UpdateProduct\" />
   </ItemGroup>
 
