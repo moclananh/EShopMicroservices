@@ -5,7 +5,7 @@ services:
     image: postgres:latest  # Specify the Postgres image
     container_name: catalogdb
     environment:
-      - POSTGRES_USER=sa
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=CatalogDb
     restart: always
