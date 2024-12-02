@@ -42,13 +42,13 @@ app.UseExceptionHandler(exceptionHandlerApp =>
         var problemDetails = new ProblemDetails
         {
             Title = exception.Message,
-            Status = StatusCodes.Status400BadRequest,
+            Status = StatusCodes.Status500InternalServerError,
             Detail = exception.StackTrace
         };
 
         var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
         logger.LogError(exception, exception.Message);
-        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Response.ContentType = "application/problem+json";
 
         await context.Response.WriteAsJsonAsync(problemDetails);
