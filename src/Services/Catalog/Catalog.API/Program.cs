@@ -1,7 +1,3 @@
-using BuidingBlocks.Behaviors;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // add services to the container.
@@ -23,6 +19,9 @@ builder.Services.AddMarten(opts =>
     opts.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
 }).UseLightweightSessions();
 
+// add reference custom exception from BuidingBlocks
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 
 var app = builder.Build();
 
@@ -30,7 +29,7 @@ var app = builder.Build();
 app.MapCarter();
 
 // custom exception handler 
-app.UseExceptionHandler(exceptionHandlerApp =>
+/*app.UseExceptionHandler(exceptionHandlerApp =>
 {
     exceptionHandlerApp.Run(async context =>
     {
@@ -54,5 +53,8 @@ app.UseExceptionHandler(exceptionHandlerApp =>
         await context.Response.WriteAsJsonAsync(problemDetails);
     });
 });
+*/
+//using new version of excepton custom
+app.UseExceptionHandler(option => { });
 
 app.Run();

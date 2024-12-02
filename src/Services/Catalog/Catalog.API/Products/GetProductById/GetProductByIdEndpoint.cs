@@ -13,10 +13,10 @@ namespace Catalog.API.Products.GetProductById
             {
                 var result = await sender.Send(new GetProductByIdQuery(id));
                 var response = result.Adapt<GetProductByIdResponse>();
-                if (response.Product is null)
+               /* if (response.Product is null)
                 {
                     return Results.BadRequest("Product not found!");
-                }
+                }*/
                 return Results.Ok(response);
             }).WithName("GetProductById")
             .Produces<GetProductByIdResponse>(StatusCodes.Status200OK)

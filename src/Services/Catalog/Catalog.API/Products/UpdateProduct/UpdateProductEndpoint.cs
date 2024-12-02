@@ -17,10 +17,10 @@
                 var command = request.Adapt<UpdateProductCommand>();
                 var result = await sender.Send(command);
                 var response = result.Adapt<UpdateProductResponse>();
-                if (response.IsSuccess == false)
+              /*  if (response.IsSuccess == false)
                 {
                     return Results.BadRequest("Update product failed: Product not exist!");
-                }
+                }*/
                 return Results.Ok(response);
             }).WithName("UpdateProduct")
             .Produces<UpdateProductResponse>(StatusCodes.Status200OK)
