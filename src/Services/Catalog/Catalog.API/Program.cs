@@ -20,6 +20,12 @@ builder.Services.AddMarten(opts =>
     opts.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
 }).UseLightweightSessions();
 
+//data seeding here
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
+}
+
 // add reference custom exception from BuidingBlocks
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
