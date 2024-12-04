@@ -13,3 +13,4 @@
 - Marten for PostgreSQL interaction
 - Mapster for Object mapping
 - Fluent validation
+- Next Sections: Scrutor, gRPC, StackExchange.Redis, Masstransit
