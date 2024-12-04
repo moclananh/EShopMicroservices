@@ -6,7 +6,7 @@
     {
         public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
         {
-            return null;
+            return new GetBasketResult(new ShoppingCart("zzz"));
         }
     }
 }
