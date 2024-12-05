@@ -6,6 +6,8 @@
 - DI
 - Minimal API
 - DDD Respository
+- Decorate
+- Proxy
 
 ### Library
 - MediatR for CQRS

@@ -12,7 +12,9 @@
   <ItemGroup>
     <PackageReference Include="Carter" Version="8.0.0" />
     <PackageReference Include="Marten" Version="7.33.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Scrutor" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
