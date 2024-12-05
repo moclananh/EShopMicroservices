@@ -1,5 +1,3 @@
-using BuidingBlocks.Exceptions.Handler;
-
 var builder = WebApplication.CreateBuilder(args);
 
 //add services to the container
@@ -28,12 +26,27 @@ builder.Services.AddStackExchangeRedisCache(option =>
     option.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
 
+//register healthcheck services
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+
 //register custom exception
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+
 var app = builder.Build();
+
 //configure HTTP request pipeline
 
 app.MapCarter();
+
 app.UseExceptionHandler(options => { });
+
+app.UseHealthChecks("/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 
 app.Run();
