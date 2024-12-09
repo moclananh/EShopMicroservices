@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-//add services to the container
+//application services
 var assembly = typeof(Program).Assembly;
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
@@ -10,6 +10,7 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
+//data services
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
@@ -18,12 +19,27 @@ builder.Services.AddMarten(opts =>
 
 //register DI
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 
 builder.Services.AddStackExchangeRedisCache(option =>
 {
     option.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
+//gRPC services
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+{
+    var handler = new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback =
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
+
+    return handler;
 });
 
 //register healthcheck services
@@ -33,7 +49,6 @@ builder.Services.AddHealthChecks()
 
 //register custom exception
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-
 
 var app = builder.Build();
 
