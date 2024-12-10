@@ -4,7 +4,7 @@
     {
         public string? CardName { get; } = default!;
         public string CardNumber { get; } = default!;
-        public string Expriration { get; } = default!;
+        public string Expiration { get; } = default!;
         public string CVV { get; } = default!;
         public int PaymentMethod {  get; } = default!;
         protected Payment() { }
@@ -12,7 +12,7 @@
         {
             CardName = cardName;
             CardNumber = cardNumber;
-            Expriration = expriration;
+            Expiration = expriration;
             CVV = cvv;
             PaymentMethod = paymentMethod;
         }

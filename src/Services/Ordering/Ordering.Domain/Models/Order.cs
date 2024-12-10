@@ -2,8 +2,10 @@
 {
     public class Order : Aggregate<OrderId>
     {
+
         private readonly List<OrderItem> _orderItems = new();
         public IReadOnlyList<OrderItem> OrderItems => _orderItems.AsReadOnly();
+
         public CustomerId CustomerId { get; private set; } = default!;
         public OrderName OrderName { get; private set; } = default!;
         public Address ShippingAddress { get; private set; } = default!;
@@ -18,7 +20,7 @@
 
         public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
         {
-            var order = new Order()
+            var order = new Order
             {
                 Id = id,
                 CustomerId = customerId,
@@ -26,9 +28,11 @@
                 ShippingAddress = shippingAddress,
                 BillingAddress = billingAddress,
                 Payment = payment,
-                Status = OrderStatus.Pending,
+                Status = OrderStatus.Pending
             };
+
             order.AddDomainEvent(new OrderCreatedEvent(order));
+
             return order;
         }
 
@@ -47,14 +51,15 @@
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
+
             var orderItem = new OrderItem(Id, productId, quantity, price);
             _orderItems.Add(orderItem);
         }
 
-        public void Remove(ProductId productId) 
+        public void Remove(ProductId productId)
         {
             var orderItem = _orderItems.FirstOrDefault(x => x.ProductId == productId);
-            if(orderItem is not null)
+            if (orderItem is not null)
             {
                 _orderItems.Remove(orderItem);
             }
