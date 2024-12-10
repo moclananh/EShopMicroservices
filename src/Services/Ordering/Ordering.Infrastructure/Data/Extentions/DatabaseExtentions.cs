@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-
+﻿
 namespace Ordering.Infrastructure.Data.Extentions
 {
     public static class DatabaseExtentions

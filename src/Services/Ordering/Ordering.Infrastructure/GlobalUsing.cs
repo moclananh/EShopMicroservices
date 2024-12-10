@@ -9,3 +9,4 @@ global using MediatR;
 global using Ordering.Domain.Abstractions;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
 global using Ordering.Domain.ValueObjects;
+global using Microsoft.AspNetCore.Builder;
