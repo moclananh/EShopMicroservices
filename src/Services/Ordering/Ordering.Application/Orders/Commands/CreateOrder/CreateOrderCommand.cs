@@ -1,6 +1,8 @@
-﻿namespace Ordering.Application.Orders.Commands.CreateOrder
+﻿using BuidingBlocks.CQRS;
+using Ordering.Application.DTOs;
+
+namespace Ordering.Application.Orders.Commands.CreateOrder
 {
-    internal class CreateOrderCommand
-    {
-    }
+    public record CreateOrderCommand(OrderDto Order) : ICommand<CreateOrderResult>;
+    public record CreateOrderResult(Guid Id);
 }
