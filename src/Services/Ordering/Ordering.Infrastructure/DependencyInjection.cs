@@ -1,4 +1,5 @@
-﻿namespace Ordering.Infrastructure
+﻿
+namespace Ordering.Infrastructure
 {
     public static class DependencyInjection
     {
@@ -8,16 +9,16 @@
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             // Add services to the container.
-           /* services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
-            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();*/
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
-               // options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
                 options.UseSqlServer(connectionString);
             });
 
-           // services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            // services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
             return services;
         }

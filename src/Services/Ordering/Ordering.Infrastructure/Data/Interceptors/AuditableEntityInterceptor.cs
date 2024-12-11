@@ -1,7 +1,6 @@
-﻿
-namespace Ordering.Infrastructure.Data.Interceptors
+﻿namespace Ordering.Infrastructure.Data.Interceptors
 {
-  /*  public class AuditableEntityInterceptor : SaveChangesInterceptor
+    public class AuditableEntityInterceptor : SaveChangesInterceptor
     {
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
         {
@@ -23,13 +22,13 @@ namespace Ordering.Infrastructure.Data.Interceptors
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Entity.CreatedBy = "mehmet";
+                    entry.Entity.CreatedBy = "admin";
                     entry.Entity.CreatedAt = DateTime.UtcNow;
                 }
 
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
                 {
-                    entry.Entity.LastModifiedBy = "mehmet";
+                    entry.Entity.LastModifiedBy = "admin";
                     entry.Entity.LastModified = DateTime.UtcNow;
                 }
             }
@@ -43,5 +42,5 @@ namespace Ordering.Infrastructure.Data.Interceptors
                 r.TargetEntry != null &&
                 r.TargetEntry.Metadata.IsOwned() &&
                 (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
-    }*/
+    }
 }

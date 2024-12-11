@@ -10,3 +10,4 @@ global using Ordering.Domain.Abstractions;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
 global using Ordering.Domain.ValueObjects;
 global using Microsoft.AspNetCore.Builder;
+global using Microsoft.EntityFrameworkCore.Diagnostics;
