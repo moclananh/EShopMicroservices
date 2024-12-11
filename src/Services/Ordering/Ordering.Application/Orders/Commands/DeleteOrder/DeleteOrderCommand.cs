@@ -1,6 +1,5 @@
 ﻿namespace Ordering.Application.Orders.Commands.DeleteOrder
 {
-    internal class DeleteOrderCommand
-    {
-    }
+    public record DeleteOrderCommand(Guid OrderId) : ICommand<DeleteOrderResult>;
+    public record DeleteOrderResult(bool IsSuccess);
 }
