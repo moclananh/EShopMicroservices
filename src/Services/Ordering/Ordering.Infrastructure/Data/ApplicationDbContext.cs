@@ -1,6 +1,4 @@
-﻿using Ordering.Application.Data;
-
-namespace Ordering.Infrastructure.Data
+﻿namespace Ordering.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {

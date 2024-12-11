@@ -1,6 +1,7 @@
-﻿namespace Ordering.Application.Orders.Commands.UpdateOrder
+﻿
+
+namespace Ordering.Application.Orders.Commands.UpdateOrder
 {
-    internal class UpdateOrderCommand
-    {
-    }
+    public record UpdateOrderCommand(OrderDto Order) : ICommand<UpdateOrderResult>;
+    public record UpdateOrderResult(bool IsSuccess);
 }
