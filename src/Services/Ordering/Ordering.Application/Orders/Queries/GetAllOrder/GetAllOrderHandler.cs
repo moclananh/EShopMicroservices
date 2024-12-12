@@ -18,8 +18,8 @@ namespace Ordering.Application.Orders.Queries.GetAllOrder
                 .ToListAsync(cancellationToken);
 
             return new GetAllOrderResult(new PaginatedResult<OrderDto>(
-                pageSize,
                 pageIndex,
+                pageSize,
                 totalCount,
                 orders.ToOrderDtoList()));
         }
