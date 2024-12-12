@@ -1,4 +1,7 @@
 ﻿
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+
 namespace Ordering.API
 {
     public static class DependencyInjection
@@ -7,9 +10,9 @@ namespace Ordering.API
         {
             services.AddCarter();
 
-           // services.AddExceptionHandler<CustomExceptionHandler>();
-           /* services.AddHealthChecks()
-                .AddSqlServer(configuration.GetConnectionString("Database")!);*/
+            services.AddExceptionHandler<CustomExceptionHandler>();
+            services.AddHealthChecks()
+                .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!);
 
             return services;
         }
@@ -18,12 +21,13 @@ namespace Ordering.API
         {
             app.MapCarter();
 
-           /* app.UseExceptionHandler(options => { });
+            app.UseExceptionHandler(options => { });
+
             app.UseHealthChecks("/health",
-                new HealthCheckOptions
-                {
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });*/
+              new HealthCheckOptions
+              {
+                  ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+              });
 
             return app;
         }
