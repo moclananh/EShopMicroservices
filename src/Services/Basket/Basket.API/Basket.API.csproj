@@ -23,13 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="GrpcServices\" />
     <Folder Include="Protos\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\BuidingBlocks\BuidingBlocks.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj" />
   </ItemGroup>
 
   <ItemGroup>

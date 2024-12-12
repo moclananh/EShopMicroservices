@@ -1,3 +1,5 @@
+using BuildingBlocks.Messaging.Masstransit;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //application services
@@ -42,13 +44,16 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     return handler;
 });
 
+//register for message broker
+builder.Services.AddMessageBroker(builder.Configuration);
+
+//register custom exception
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 //register healthcheck services
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
-
-//register custom exception
-builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
