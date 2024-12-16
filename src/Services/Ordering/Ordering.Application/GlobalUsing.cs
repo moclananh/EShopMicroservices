@@ -11,3 +11,5 @@ global using Microsoft.Extensions.Logging;
 global using Ordering.Domain.Events;
 global using Microsoft.EntityFrameworkCore;
 global using Ordering.Application.Extentions;
+global using MassTransit;
+global using Microsoft.FeatureManagement;
